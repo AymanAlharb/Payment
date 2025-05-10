@@ -6,24 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class User {
+public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private Double balance;
+    private String status;
+    private Double totalPrice;
+    private LocalDateTime dateTime;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Product> products;
+    @OneToOne
+    private Product product;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Invoice> invoices;
-
+    @ManyToOne
+    private User user;
 }

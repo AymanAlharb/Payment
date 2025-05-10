@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 public class PaymentController {
     private final PaymentService paymentService;
 
-    @PostMapping("/card")
-    public ResponseEntity<ResponseEntity<String>> processPayment(@RequestBody PaymentRequest paymentRequest){
-        return ResponseEntity.status(200).body(paymentService.processPayment(paymentRequest));
+    @PostMapping("/card/{userId}/{productId}")
+    public ResponseEntity<ResponseEntity<String>> processPayment(@PathVariable Integer userId, @PathVariable Integer productId, @RequestBody PaymentRequest paymentRequest){
+        return ResponseEntity.status(200).body(paymentService.processPayment(paymentRequest, userId, productId));
     }
 
     @GetMapping("/get-status/{id}")
